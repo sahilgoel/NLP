@@ -23,23 +23,23 @@ import java.util.StringTokenizer;
  * @author sahil
  */
 public class Text {
-	public static void main(String[] args) throws FileNotFoundException, IOException {
-		Scanner in = new Scanner(new File("src/training.txt"));
+    public static void main(String[] args) throws FileNotFoundException, IOException {
+        Scanner in = new Scanner(new File("src/training.txt"));
                 File file = new File("src/features.txt");
  
-			// if file doesnt exists, then create it
-			if (!file.exists()) {
-				file.createNewFile();
-			}
+            // if file doesnt exists, then create it
+            if (!file.exists()) {
+                file.createNewFile();
+            }
  
                 FileWriter fw = new FileWriter(file.getAbsoluteFile());
-		BufferedWriter bw = new BufferedWriter(fw);
+        BufferedWriter bw = new BufferedWriter(fw);
                 
-		int i = 0;
+        int i = 0;
                 String p_line = null, c_line, n_line= null;
                 int beg = 1;
                 c_line = in.nextLine();
-		while(in.hasNextLine()){
+        while(in.hasNextLine()){
                          if(in.hasNextLine())
                              n_line = in.nextLine();
                          
@@ -77,21 +77,21 @@ public class Text {
                          //    System.out.println("Next_Word=<END>  ");
                              bw.write("Next_Word=<END>  ");
                              bw.write("Next_Tag=<!> ");
-                             bw.write("Next_Upper_Case=false");
+          //                   bw.write("Next_Upper_Case=false");
                          }
                          else
                          {
                          //    System.out.print("Next_Word=" + (n_line.split(" "))[0] + " ");
                              bw.write("Next_Word=" + (n_line.split(" "))[0] + " ");
                              bw.write("Next_Tag=" + (n_line.split(" "))[1] + " ");
-                             bw.write("Next_Upper_Case="  + Character.isUpperCase((n_line.split(" "))[0].charAt(0)) + " ");
+              //               bw.write("Next_Upper_Case="  + Character.isUpperCase((n_line.split(" "))[0].charAt(0)) + " ");
                          }
                          //System.out.println(" " + arr[1]);
                          bw.write(" " + arr[2]);
                          bw.write("\n");
                          p_line = c_line;
                          c_line = n_line;
-		 }
+         }
                 bw.close();
-	}
+    }
 }

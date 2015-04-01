@@ -33,7 +33,7 @@ public class NLPT {
          String modelFileName ="/Users/sahil/Downloads/NLP/model1";
          GISModel m = (GISModel) new SuffixSensitiveGISModelReader(new File(modelFileName)).getModel();
          Scanner in = new Scanner(new File("src/test.txt"));
-         String[] features = new String[10];
+         String[] features = new String[9];
          int total = 0;
          int correct = 0;
          int wrong = 0;
@@ -47,6 +47,7 @@ public class NLPT {
          String p_tag= "<@>";
          while(in.hasNextLine())
          {
+             int k=0;
              if(in.hasNextLine())
                 n_line = in.nextLine();
              
@@ -61,34 +62,34 @@ public class NLPT {
              
              if(p_line==null || (p_line.split(" ")).length == 1)
              {    
-                 features[0] = "Previous_Word=<START>";
-                 features[1] = "Previous_Tag=<>";
-                 features[2] = "Previous_Upper_Case=false";
-                 features[3] = "Previous_BIO=<@>";
+                 features[k++] = "Previous_Word=<START>";
+                 features[k++] = "Previous_Tag=<>";
+                 features[k++] = "Previous_Upper_Case=false";
+                 features[k++] = "Previous_BIO=<@>";
              }
              else
              {
-                 features[0] = "Previous_Word="+(p_line.split(" "))[0];
-                 features[1] = "Previous_Word="+(p_line.split(" "))[1];
-                 features[2] = "Previous_Upper_Case="+(Character.isUpperCase((p_line.split(" "))[0].charAt(0)));
-                 features[3] = "Previous_BIO="+p_tag;
+                 features[k++] = "Previous_Word="+(p_line.split(" "))[0];
+                 features[k++] = "Previous_Tag="+(p_line.split(" "))[1];
+                 features[k++] = "Previous_Upper_Case="+(Character.isUpperCase((p_line.split(" "))[0].charAt(0)));
+                 features[k++] = "Previous_BIO="+p_tag;
              }
              
-             features[4] = "Current_Word="+arr[0];
-             features[5] = "Upper_Case=" + Character.isUpperCase(arr[0].charAt(0));
-             features[6] = "Current_Tag=" +arr[1];
+             features[k++] = "Current_Word="+arr[0];
+             features[k++] = "Upper_Case=" + Character.isUpperCase(arr[0].charAt(0));
+             features[k++] = "Current_Tag=" +arr[1];
              
              if(n_line==null || (n_line.split(" ")).length==1)
              {   
-                 features[7] ="Next_Word=<END>";
-                 features[8] ="Next_Tag=<!>";
-                 features[9] ="Next_Upper_Case=false";
+                 features[k++] ="Next_Word=<END>";
+                 features[k++] ="Next_Tag=<!>";
+         //        features[k++] ="Next_Upper_Case=false";
              }
              else
              {
-                 features[7] ="Next_Word="+(n_line.split(" "))[0];
-                 features[8] ="Next_Tag="+(n_line.split(" "))[1];
-                 features[9] ="Next_Upper_Case="+(Character.isUpperCase((n_line.split(" "))[0].charAt(0)));
+                 features[k++] ="Next_Word="+(n_line.split(" "))[0];
+                 features[k++] ="Next_Tag="+(n_line.split(" "))[1];
+          //       features[k++] ="Next_Upper_Case="+(Character.isUpperCase((n_line.split(" "))[0].charAt(0)));
              }
              p_line = c_line;
              c_line = n_line;
